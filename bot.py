@@ -1,7 +1,8 @@
 from email import message
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from random import randint
+from random import randint, choice
+from glob import glob
 
 import settings
 
@@ -38,12 +39,19 @@ def guess_number(update, context):
         message = "Введите число"
     update.message.reply_text(message)
 
+def send_cat_picture(update, context):
+    cat_photos_list = glob("images/cat*.jp*g")
+    cat_pic_filename = choice(cat_photos_list)
+    chat_id = update.effective_chat.id
+    context.bot.send_photo(chat_id=chat_id, photo=open(cat_pic_filename, "rb"))
+
 def main():
     mybot = Updater(settings.APY_KEY, use_context=True)
     
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("guess", guess_number))
+    dp.add_handler(CommandHandler("cat", send_cat_picture))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     logging.info('Бот стартовал')
