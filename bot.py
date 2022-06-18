@@ -40,6 +40,7 @@ def guess_number(update, context):
     update.message.reply_text(message)
 
 def send_cat_picture(update, context):
+    print("Использована команда котик")
     cat_photos_list = glob("images/cat*.jp*g")
     cat_pic_filename = choice(cat_photos_list)
     chat_id = update.effective_chat.id
