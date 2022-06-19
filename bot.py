@@ -9,20 +9,23 @@ import settings
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
-def smile_lite():
-    smile = choice(settings.USER_EMOJI)
-    return smile = emojize(smile, use_aliases=True)
+def smile_lite(user_data):
+    if "emoji" not in user_data:
+        smile = choice(settings.USER_EMOJI)
+        return emojize(smile, use_aliases=True)
+    else:
+        return user_data["emoji"]
 
 def greet_user(update, context):
-    smile = smile_lite()
+    context.user_data["emoji"] = smile_lite(context.user_data)
     print('Вызван /start')
-    update.message.reply_text(f'Здравстыуй пользователь {smile} !')
+    update.message.reply_text(f'Здравстыуй пользователь {context.user_data["emoji"]} !')
 
 def talk_to_me(update, context):
     text = update.message.text
-    smile = smile_lite()
+    context.user_data["emoji"] = smile_lite(context.user_data)
     print(text)
-    update.message.reply_text(f"{text} {smile}" )
+    update.message.reply_text(f'{text} {context.user_data["emoji"]}' )
 
 def play_random_number(user_number):
     bot_number = randint(user_number - 10, user_number + 10)
