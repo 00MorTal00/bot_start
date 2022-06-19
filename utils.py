@@ -25,4 +25,4 @@ def play_random_number(user_number):
 
 
 def main_keyboard():
-    return ReplyKeyboardMarkup([["Прислать котика"], ["Тест"]])
+    return ReplyKeyboardMarkup([["Прислать котика"]])
