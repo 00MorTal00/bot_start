@@ -3,17 +3,17 @@ from random import choice
 from utils import smile_lite, main_keyboard
 
 def greet_user(update, context):
-    context.user_data["emoji"] = smile_lite(context.user_data)
+    context.user_data['emoji'] = smile_lite(context.user_data)
     print('Вызван /start')
     update.message.reply_text(
-        f'Здравстыуй пользователь {context.user_data["emoji"]} !', reply_markup=main_keyboard())
+        f"Здравстыуй пользователь {context.user_data['emoji']} !", reply_markup=main_keyboard())
 
 def talk_to_me(update, context):
     text = update.message.text
-    context.user_data["emoji"] = smile_lite(context.user_data)
+    context.user_data['emoji'] = smile_lite(context.user_data)
     print(text)
     update.message.reply_text(
-        f'{text} {context.user_data["emoji"]}',
+        f"{text} {context.user_data['emoji']}",
         reply_markup=main_keyboard()
         )
 

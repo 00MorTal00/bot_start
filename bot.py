@@ -7,6 +7,7 @@ from game_guess_namber import game_namber
 
 import settings
 from handlers import greet_user, send_cat_picture, talk_to_me
+from utils import close_keyboard, open_keyboard
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
@@ -19,6 +20,8 @@ def main():
     dp.add_handler(game_namber)
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("cat", send_cat_picture))
+    dp.add_handler(CommandHandler("open", open_keyboard))
+    dp.add_handler(CommandHandler("close", close_keyboard))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$"), send_cat_picture))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
