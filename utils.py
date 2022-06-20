@@ -25,7 +25,7 @@ def play_random_number(user_number):
 
 
 def main_keyboard():
-    return ReplyKeyboardMarkup([["Прислать котика"], ["Игра у кого чило больше"]], resize_keyboard= True)
+    return ReplyKeyboardMarkup([["Прислать котика"], ["Игра у кого число больше"]], resize_keyboard= True)
 
 def open_keyboard(update, context):
     context.user_data['emoji'] = smile_lite(context.user_data)
