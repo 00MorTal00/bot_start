@@ -1,7 +1,5 @@
 from telegram import ReplyKeyboardMarkup
-from glob import glob
 from telegram.ext import CommandHandler, MessageHandler, Filters, ConversationHandler
-from random import randint, choice
 from utils import play_random_number, main_keyboard
 
 def start(update, context):

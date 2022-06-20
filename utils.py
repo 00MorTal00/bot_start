@@ -1,5 +1,4 @@
 import settings
-from glob import glob
 from emoji import emojize
 from random import randint, choice
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
