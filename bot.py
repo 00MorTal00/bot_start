@@ -5,7 +5,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from game_guess_namber import game_namber
 
 import settings
-from handlers import greet_user, send_cat_picture, talk_to_me
+from handlers import greet_user, send_cat_picture, send_users_picture, talk_to_me, check_user_photo
 from utils import close_keyboard, open_keyboard
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
@@ -19,9 +19,12 @@ def main():
     dp.add_handler(game_namber)
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("cat", send_cat_picture))
+    dp.add_handler(CommandHandler("user_photo", send_users_picture))
     dp.add_handler(CommandHandler("open", open_keyboard))
     dp.add_handler(CommandHandler("close", close_keyboard))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$"), send_cat_picture))
+    dp.add_handler(MessageHandler(Filters.regex("^(Прислать картинку)$"), send_users_picture))
+    dp.add_handler(MessageHandler(Filters.photo, check_user_photo))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     logging.info('Бот стартовал')
