@@ -1,25 +1,23 @@
 import os
 from glob import glob
 from random import choice
-from utils import smile_lite, main_keyboard
-from bot_db import db_input
+from utils import main_keyboard
+from bot_db import db_input, emoji_of_the_user
 
 def greet_user(update, context):
-    context.user_data['emoji'] = smile_lite(context.user_data)
     print('Вызван /start')
     db_input(update.effective_user, update.message.chat.id)
     update.message.reply_text(
-        f"Здравстыуй пользователь {context.user_data['emoji']} !", 
+        f"Здравстыуй пользователь {emoji_of_the_user(update.effective_user)} !", 
         reply_markup=main_keyboard()
         )
 
 def talk_to_me(update, context):
     text = update.message.text
-    context.user_data['emoji'] = smile_lite(context.user_data)
     print(text)
     db_input(update.effective_user, update.message.chat.id)
     update.message.reply_text(
-        f"{text} {context.user_data['emoji']}",
+        f"{text} {emoji_of_the_user(update.effective_user)}",
         reply_markup=main_keyboard()
         )
 
@@ -46,9 +44,8 @@ def check_user_photo(update, context):
     file_name = os.path.join('user_photo', f'{update.message.photo[-1].file_id}.jpg')
     photo_file.download(file_name)
     print('прислали фото')
-    context.user_data['emoji'] = smile_lite(context.user_data)
     db_input(update.effective_user, update.message.chat.id)
     update.message.reply_text(
-        f"Фото сохранено. {context.user_data['emoji']} ", 
+        f"Фото сохранено. {emoji_of_the_user(update.effective_user)} ", 
         reply_markup=main_keyboard()
         )
