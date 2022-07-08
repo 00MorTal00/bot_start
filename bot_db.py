@@ -30,21 +30,15 @@ def emoji_of_the_user(effective_user):
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
     people_id = effective_user.id
-    data_id = """select * from bot_database where user_id = ?"""
-    cur.execute(data_id, (people_id,))
-    emoji_user = cur.fetchall()
-    for row in emoji_user:
-            emoji_of_user = row[-1]
-    if emoji_of_user is None:
+    data_id = "SELECT emoji_status FROM bot_database WHERE user_id = ?"
+    emoji_user = cur.execute(data_id, (people_id,)).fetchone()
+    if emoji_user is None:
         update_emoji(people_id)    
-    return emoji_of_user    
+    return emoji_user[0]    
 
 def update_emoji(people_id):
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
     emoji = emojize(choice(settings.USER_EMOJI), use_aliases=True)
-    new_emoji = cur.execute(f'SELECT emoji_status FROM bot_database WHERE user_id ={people_id}').fetchall()
-    for x in new_emoji:
-        emoji_status = x
-        cur.execute('UPDATE bot_database SET emoji_status = ? WHERE user_id= ?',(emoji, people_id))
+    cur.execute('UPDATE bot_database SET emoji_status = ? WHERE user_id= ?',(emoji, people_id))
     conn.commit()
