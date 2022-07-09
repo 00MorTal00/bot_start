@@ -15,7 +15,7 @@ def db_input (effective_user, chat_id):
         user_surname        TEXT,
         username            STRING,
         emoji_status        STRING
-        subscribe_status    INTEGER
+        subscribe_status    TEXT
     )""")
     conn.commit()
     people_id = effective_user.id
@@ -23,7 +23,7 @@ def db_input (effective_user, chat_id):
     data_user = cur.fetchone()
     emoji = emojize(choice(settings.USER_EMOJI), use_aliases=True)
     if data_user is None:
-        user_data =  [effective_user.id, chat_id, effective_user.first_name, effective_user.last_name, effective_user.username, emoji, 0]
+        user_data =  [effective_user.id, chat_id, effective_user.first_name, effective_user.last_name, effective_user.username, emoji, "No"]
         cur.execute("INSERT INTO bot_database VALUES(?, ?, ?, ?, ?, ?, ?);", user_data)
         conn.commit()
 

@@ -8,6 +8,7 @@ import settings
 from handlers import greet_user, send_cat_picture, send_users_picture, talk_to_me, check_user_photo
 from utils import close_keyboard, open_keyboard, replacement_smile
 from subscription import subscribe, unsubscribe
+from jobs import send_to_subscribe
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
@@ -15,6 +16,9 @@ logging.basicConfig(filename="bot.log", level= logging.INFO)
 def main():
     mybot = Updater(settings.APY_KEY, use_context=True)
     
+    jb = mybot.job_queue
+
+    jb.run_repeating(send_to_subscribe, interval=10, first=0)
     dp = mybot.dispatcher
     
     dp.add_handler(game_namber)

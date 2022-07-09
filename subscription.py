@@ -10,14 +10,14 @@ def subscribe(update, context):
     for row in subscribe_people:
             subscribe_user = row[0]
     if subscribe_user is None:
-        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',(1, people_id))
+        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',("Yes", people_id))
         conn.commit()
         update.message.reply_text(
         f"Теперь вы подписаны {emoji_of_the_user(update.effective_user)}",
         reply_markup=main_keyboard()
         )
-    elif subscribe_user == 0:
-        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',(1, people_id))
+    elif subscribe_user == "No":
+        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',("Yes", people_id))
         conn.commit()
         update.message.reply_text(
         f"Теперь вы подписаны {emoji_of_the_user(update.effective_user)}",
@@ -42,13 +42,13 @@ def unsubscribe(update, context):
         f"Вы еще не подписаны {emoji_of_the_user(update.effective_user)}",
         reply_markup=main_keyboard()
         )
-    elif subscribe_user == 0:
+    elif subscribe_user == "No":
         update.message.reply_text(
         f"Вы уже отписаны {emoji_of_the_user(update.effective_user)}",
         reply_markup=main_keyboard()
         )
     else:
-        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',(0, people_id))
+        cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',("No", people_id))
         conn.commit()
         update.message.reply_text(
         f"Вы отписались {emoji_of_the_user(update.effective_user)}",
