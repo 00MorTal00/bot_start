@@ -1,8 +1,9 @@
 import sqlite3
 from utils import main_keyboard
-from bot_db import emoji_of_the_user
+from bot_db import emoji_of_the_user, db_input
 
 def subscribe(update, context):
+    db_input(update.effective_user, update.message.chat.id)
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
     people_id = update.effective_user.id
@@ -31,6 +32,7 @@ def subscribe(update, context):
 
 
 def unsubscribe(update, context):
+    db_input(update.effective_user, update.message.chat.id)
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
     people_id = update.effective_user.id
