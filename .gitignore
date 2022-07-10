@@ -4,5 +4,5 @@ env/
 __pycache__/
 *а.txt
 images/
-db/
+db/bot_database.db
 user_photo/
