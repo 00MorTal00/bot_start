@@ -1,11 +1,12 @@
 import sqlite3 
-import emoji
-import settings
+import os
+import emoji_from_dev
 from emoji import emojize
 from random import choice
 
 
 def db_input (effective_user, chat_id):
+    os.makedirs('db', exist_ok=True)
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS bot_database(
@@ -21,7 +22,7 @@ def db_input (effective_user, chat_id):
     people_id = effective_user.id
     cur.execute(f"SELECT user_id FROM bot_database WHERE user_id = {people_id}")
     data_user = cur.fetchone()
-    emoji = emojize(choice(settings.USER_EMOJI), use_aliases=True)
+    emoji = emojize(choice(emoji_from_dev.USER_EMOJI), use_aliases=True)
     sub = "No"
     if data_user is None:
         user_data =  [effective_user.id, chat_id, effective_user.first_name, effective_user.last_name, effective_user.username, emoji, sub]
@@ -44,6 +45,6 @@ def emoji_of_the_user(effective_user):
 def update_emoji(people_id):
     conn = sqlite3.connect('db/bot_database.db')
     cur = conn.cursor()
-    emoji = emojize(choice(settings.USER_EMOJI), use_aliases=True)
+    emoji = emojize(choice(emoji_from_dev.USER_EMOJI), use_aliases=True)
     cur.execute('UPDATE bot_database SET emoji_status = ? WHERE user_id= ?',(emoji, people_id))
     conn.commit()
