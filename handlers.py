@@ -1,7 +1,7 @@
 import os
 from glob import glob
 from random import choice
-from utils import main_keyboard
+from utils import main_keyboard, language_keyboard
 from bot_db import db_input, emoji_of_the_user
 
 def greet_user(update, context):
@@ -10,6 +10,10 @@ def greet_user(update, context):
     update.message.reply_text(
         f"Здравстыуй пользователь {emoji_of_the_user(update.effective_user)} !", 
         reply_markup=main_keyboard()
+        )
+    update.message.reply_text(
+        f"Выберите язык / Choose language {emoji_of_the_user(update.effective_user)}", 
+        reply_markup=language_keyboard()
         )
 
 def talk_to_me(update, context):

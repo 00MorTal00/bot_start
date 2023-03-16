@@ -9,6 +9,7 @@ from handlers import greet_user, send_cat_picture, send_users_picture, talk_to_m
 from utils import close_keyboard, open_keyboard, replacement_smile
 from subscription import subscribe, unsubscribe
 from jobs import send_to_subscribe
+from language import ru_language, en_language
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
@@ -30,8 +31,12 @@ def main():
     dp.add_handler(CommandHandler("change_smile", replacement_smile))
     dp.add_handler(CommandHandler("subscribe", subscribe))
     dp.add_handler(CommandHandler("unsubscribe", unsubscribe))
+    dp.add_handler(CommandHandler("russian_language", ru_language))
+    dp.add_handler(CommandHandler("english_language", en_language))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$"), send_cat_picture))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать картинку)$"), send_users_picture))
+    dp.add_handler(MessageHandler(Filters.regex("^(Перейти на Русский язык)$"), ru_language))
+    dp.add_handler(MessageHandler(Filters.regex("^(Switch to English)$"), en_language))
     dp.add_handler(MessageHandler(Filters.photo, check_user_photo))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
