@@ -1,0 +1,1 @@
+USER_EMOJI = [':smiling_imp:',':alien:',':japanese_goblin:',':japanese_ogre:',':skull:',':snake:',':whale:',':dolphin:',':dragon_face:',':penguin:']
