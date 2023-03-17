@@ -2,6 +2,7 @@
 from bot_db import emoji_of_the_user, update_emoji
 from random import randint
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
+from translate import send_cat, send_picture
 
 
 def play_random_number(user_number, update):
@@ -16,14 +17,14 @@ def play_random_number(user_number, update):
 
 
 
-def main_keyboard():
-    return ReplyKeyboardMarkup([["Прислать котика","Прислать картинку"],["Игра у кого число больше"]], resize_keyboard= True)
+def main_keyboard(update, context):
+    send_cat_translate= send_cat(update, context)
+    send_picture_translate= send_picture
+    return ReplyKeyboardMarkup([[f"{send_cat_translate}", f"{send_picture_translate}"],["Игра у кого число больше"]], resize_keyboard= True)
 
-def language_keyboard():
-    return ReplyKeyboardMarkup([["Перейти на Русский язык", "Switch to English"]], resize_keyboard= True)
 
 def open_keyboard(update, context):
-    update.message.reply_text(f"Вы открыли клавиатуру {emoji_of_the_user(update.effective_user)}", reply_markup=main_keyboard())
+    update.message.reply_text(f"Вы открыли клавиатуру {emoji_of_the_user(update.effective_user)}", reply_markup=main_keyboard(update, context))
     
 
 def close_keyboard(update, context):
@@ -34,5 +35,5 @@ def replacement_smile(update, context):
     update_emoji(people_id)
     update.message.reply_text(
         f"Теперь у вас такой самйлик {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup=main_keyboard(update, context)
         )

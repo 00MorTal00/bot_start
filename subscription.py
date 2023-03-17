@@ -15,19 +15,19 @@ def subscribe(update, context):
         conn.commit()
         update.message.reply_text(
         f"Теперь вы подписаны {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
     elif subscribe_user == "No":
         cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',("Yes", people_id))
         conn.commit()
         update.message.reply_text(
         f"Теперь вы подписаны {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
     else:
         update.message.reply_text(
         f"Вы уже подписаны {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
 
 
@@ -42,17 +42,17 @@ def unsubscribe(update, context):
     if subscribe_user is None:
         update.message.reply_text(
         f"Вы еще не подписаны {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
     elif subscribe_user == "No":
         update.message.reply_text(
         f"Вы уже отписаны {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
     else:
         cur.execute('UPDATE bot_database SET subscribe_status = ? WHERE user_id= ?',("No", people_id))
         conn.commit()
         update.message.reply_text(
         f"Вы отписались {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard()
+        reply_markup= main_keyboard(update, context)
         )
