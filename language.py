@@ -1,5 +1,5 @@
 import sqlite3
-from utils import main_keyboard
+from utils import main_keyboard, language_keyboard
 from bot_db import emoji_of_the_user, db_input
 
 def en_language(update, context):
