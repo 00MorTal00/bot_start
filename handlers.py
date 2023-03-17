@@ -30,7 +30,8 @@ def talk_to_me(update, context):
 def send_cat_picture(update, context):
     print("Использована команда котик")
     db_input(update.effective_user, update.message.chat.id)
-    cat_photos_list = glob("images/cat*.jp*g")
+    os.makedirs('images_cat', exist_ok=True)
+    cat_photos_list = glob("images_cat/cat*.jp*g")
     cat_pic_filename = choice(cat_photos_list)
     chat_id = update.effective_chat.id
     context.bot.send_photo(chat_id=chat_id, photo=open(cat_pic_filename, "rb"), reply_markup=main_keyboard(update, context))
@@ -38,6 +39,7 @@ def send_cat_picture(update, context):
 def send_users_picture(update, context):
     print("Использована команда фото")
     db_input(update.effective_user, update.message.chat.id)
+    os.makedirs('user_photo', exist_ok=True)
     user_photos_list = glob("user_photo/*.jp*g")
     user_pic_filename = choice(user_photos_list)
     chat_id = update.effective_chat.id

@@ -16,7 +16,7 @@ def en_language(update, context):
         conn.commit()
         update.message.reply_text(
         f"Selected English {emoji_of_the_user(update.effective_user)}",
-        reply_markup=main_keyboard(update, context)
+        reply_markup= main_keyboard(update, context)
         )
     elif language_user == "russian":
         cur.execute('UPDATE bot_database SET language = ? WHERE user_id= ?',("english", people_id))

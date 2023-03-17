@@ -38,7 +38,7 @@ def crach_game(update, context):
 
 
 game_namber = ConversationHandler(
-        entry_points=[CommandHandler("guess", start), MessageHandler(Filters.regex("^(Игра у кого число больше)$"), start)],
+        entry_points=[CommandHandler("guess", start), MessageHandler(Filters.regex("^(Игра у кого число больше)$") | Filters.regex("^(Game guess whose number higher)$"), start)],
         states={"namber": [MessageHandler(Filters.text, game_body)]},
         fallbacks=[MessageHandler(Filters.text, crach_game)]
     )        

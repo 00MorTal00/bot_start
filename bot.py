@@ -10,6 +10,7 @@ from utils import close_keyboard, open_keyboard, replacement_smile
 from subscription import subscribe, unsubscribe
 from jobs import send_to_subscribe
 from language import ru_language, en_language
+from translate import send_picture, send_cat
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
@@ -33,8 +34,8 @@ def main():
     dp.add_handler(CommandHandler("unsubscribe", unsubscribe))
     dp.add_handler(CommandHandler("russian_language", ru_language))
     dp.add_handler(CommandHandler("english_language", en_language))
-    dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$"), send_cat_picture))
-    dp.add_handler(MessageHandler(Filters.regex("^(Прислать картинку)$"), send_users_picture))
+    dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$") | Filters.regex("^(Send a cat)$"), send_cat_picture))
+    dp.add_handler(MessageHandler(Filters.regex("^(Прислать картинку)$") | Filters.regex("^(Send picture)$"), send_users_picture))
     dp.add_handler(MessageHandler(Filters.regex("^(Перейти на Русский язык)$"), ru_language))
     dp.add_handler(MessageHandler(Filters.regex("^(Switch to English)$"), en_language))
     dp.add_handler(MessageHandler(Filters.photo, check_user_photo))

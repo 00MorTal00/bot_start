@@ -3,6 +3,6 @@ settings.py
 env/
 __pycache__/
 *а.txt
-images/
+images_cat/
 bot_database.db
 user_photo/
