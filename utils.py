@@ -1,8 +1,7 @@
 
 from bot_db import emoji_of_the_user, update_emoji
 from random import randint
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
-
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 
 
 def play_random_number(user_number, update):
@@ -17,9 +16,8 @@ def play_random_number(user_number, update):
 
 
 
-
 def main_keyboard():
-    return ReplyKeyboardMarkup([["Прислать котика", "Прислать картинку"], ["Игра у кого число больше"]], resize_keyboard= True)
+    return ReplyKeyboardMarkup([["Прислать котика","Прислать картинку"],["Игра у кого число больше"]], resize_keyboard= True)
 
 def language_keyboard():
     return ReplyKeyboardMarkup([["Перейти на Русский язык", "Switch to English"]], resize_keyboard= True)
