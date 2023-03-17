@@ -19,7 +19,7 @@ def play_random_number(user_number, update):
 
 def main_keyboard(update, context):
     send_cat_translate= send_cat(update, context)
-    send_picture_translate= send_picture
+    send_picture_translate= send_picture(update, context)
     return ReplyKeyboardMarkup([[f"{send_cat_translate}", f"{send_picture_translate}"],["Игра у кого число больше"]], resize_keyboard= True)
 
 
