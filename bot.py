@@ -5,12 +5,11 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from game_guess_namber import game_namber
 
 import settings
-from handlers import greet_user, send_cat_picture, send_users_picture, talk_to_me, check_user_photo
+from handlers import greet_user, send_cat_picture, send_users_picture, talk_to_me, check_user_photo, new_language
 from utils import close_keyboard, open_keyboard, replacement_smile
 from subscription import subscribe, unsubscribe
 from jobs import send_to_subscribe
 from language import ru_language, en_language
-from translate import language_keyboard
 
 logging.basicConfig(filename="bot.log", level= logging.INFO)
 
@@ -34,7 +33,7 @@ def main():
     dp.add_handler(CommandHandler("unsubscribe", unsubscribe))
     dp.add_handler(CommandHandler("russian_language", ru_language))
     dp.add_handler(CommandHandler("english_language", en_language))
-    dp.add_handler(CommandHandler("change_language", language_keyboard))
+    dp.add_handler(CommandHandler("change_language", new_language))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать котика)$") | Filters.regex("^(Send a cat)$"), send_cat_picture))
     dp.add_handler(MessageHandler(Filters.regex("^(Прислать картинку)$") | Filters.regex("^(Send picture)$"), send_users_picture))
     dp.add_handler(MessageHandler(Filters.regex("^(Перейти на Русский язык)$"), ru_language))

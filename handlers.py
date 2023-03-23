@@ -9,9 +9,16 @@ def greet_user(update, context):
     print('Вызван /start')
     db_input(update.effective_user, update.message.chat.id)
     update.message.reply_text(
-        f"Здравстыуй пользователь {emoji_of_the_user(update.effective_user)} !", 
-        reply_markup=main_keyboard(update, context)
+        f"Здравстыуй пользователь {emoji_of_the_user(update.effective_user)} !"
         )
+    update.message.reply_text(
+        f"Выберите язык / Choose language {emoji_of_the_user(update.effective_user)}", 
+        reply_markup=language_keyboard()
+        )
+
+def new_language(update, context):
+    print('Вызван перевыбор языка')
+    db_input(update.effective_user, update.message.chat.id)
     update.message.reply_text(
         f"Выберите язык / Choose language {emoji_of_the_user(update.effective_user)}", 
         reply_markup=language_keyboard()
